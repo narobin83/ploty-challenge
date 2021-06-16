@@ -13,30 +13,35 @@ function buildMetadata(sample) {
 
 function buildCharts(sample) {
     d3.json("samples.json").then((data) => {
-        var samples= data.samples;
-        var resultsarray= samples.filter(sampleobject => sampleobject.id == sample);
-        var result= resultsarray[0]
-    
-        var ids = result.otu_ids;
-        var labels = result.otu_labels;
-        var values = result.sample_values; 
+      var samples = data.samples;
+      var resultArray = samples.filter(sampleObj => sampleObj.id == sample);
+      var result = resultArray[0];
+  
+      var otu_ids = result.otu_ids;
+      var otu_labels = result.otu_labels;
+      var sample_values = result.sample_values;
+  
+      // Build a Bubble Chart
+      var bubbleLayout = {
+        title: "Bacteria Cultures Per Sample",
+        margin: { t: 0 },
+        hovermode: "closest",
+        xaxis: { title: "OTU ID" },
+        margin: { t: 30}
+      };
+      var bubbleData = [
+        {
+          x: otu_ids,
+          y: sample_values,
+          text: otu_labels,
+          mode: "markers",
+          marker: {
+            size: sample_values,
+            color: otu_ids,
+            colorscale: "Earth"
+          }
+        }
+      ];
+  
+      Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
-        var bar_data =[
-            {
-              y:ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse(),
-              x:values.slice(0,10).reverse(),
-              text:labels.slice(0,10).reverse(),
-              type:"bar",
-              orientation:"h"
-      
-            }
-          ];
-      
-          var barLayout = {
-            title: "Top 10 Bacteria Cultures Found",
-            margin: { t: 30, l: 150 }
-          };
-      
-          Plotly.newPlot("bar", bar_data, barLayout);
-        });
-        
