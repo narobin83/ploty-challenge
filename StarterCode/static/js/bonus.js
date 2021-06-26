@@ -52,4 +52,15 @@ function buildGauge(wfreq) {
         showlegend: false
       }
     ];
+    var layout = {
+        shapes: [
+          {
+            type: "path",
+            path: path,
+            fillcolor: "850000",
+            line: {
+              color: "850000"
+            }
+          }
+        ],
 }
