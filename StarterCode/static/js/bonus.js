@@ -13,4 +13,16 @@ function buildGauge(wfreq) {
     var pathY = String(y);
     var pathEnd = " Z";
     var path = mainPath.concat(pathX, space, pathY, pathEnd);
+
+    var data = [
+        {
+          type: "scatter",
+          x: [0],
+          y: [0],
+          marker: { size: 12, color: "850000" },
+          showlegend: false,
+          name: "Freq",
+          text: level,
+          hoverinfo: "text+name"
+        },
 }
