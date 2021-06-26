@@ -72,4 +72,11 @@ function buildGauge(wfreq) {
             showgrid: false,
             range: [-1, 1]
       },
+      yaxis: {
+        zeroline: false,
+        showticklabels: false,
+        showgrid: false,
+        range: [-1, 1]
+      }
+    };
 }
